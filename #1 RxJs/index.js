@@ -41,7 +41,7 @@ userActionEmulation$.pipe(
   switchMap(() => sucessRequestEmulation$, (value, sucessRequest) => value + "; " + sucessRequest.value),
   mergeMap(() => errorRequestEmulation$.pipe(
     catchError(err => of(err.error)),
-  ),  (x, y) => x + "; Error - " + y)
+  ),  (value, errorMsg) => value + "; Error - " + errorMsg)
 
 
   

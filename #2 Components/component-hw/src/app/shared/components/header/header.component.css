@@ -1,0 +1,19 @@
+.header-wrapper{
+    margin: 10px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.header__logo{
+    width: 150px;
+    height: 60px;
+}
+.header__log-part{
+    width: 200px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.header__log-part:first-child{
+    margin-right: 10px;
+}
