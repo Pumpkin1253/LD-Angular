@@ -1,0 +1,16 @@
+<div class="header-wrapper">
+    <app-header>
+        <div>Dave</div>
+        <app-button btnText="Logout"></app-button>
+    </app-header>
+</div>
+
+<app-search
+placeholderText = "Search"
+(searchDataEvent) = "log($event)"
+>
+</app-search>
+
+<div class="form-wrapper">
+    <app-course-form></app-course-form>
+</div>

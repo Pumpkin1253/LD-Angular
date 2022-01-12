@@ -1,0 +1,12 @@
+.search__form{
+    margin: 10px;
+    display: flex;
+}
+.search__input{
+    width: 80%;
+    border: 2px solid #f6cfae;
+}
+.search__btn{
+    width: 15%;
+    margin-left: 5%;
+}

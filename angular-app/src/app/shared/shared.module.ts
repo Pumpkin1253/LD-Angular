@@ -11,6 +11,8 @@ import { DurationPipe } from './pipes/duration.pipe';
 import { AuthorsPipe } from './pipes/authors.pipe';
 import { CourseListComponent } from './components/course-list/course-list.component';
 import { ModalWindowComponent } from './components/modal-window/modal-window.component';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { CourseFormComponent } from './components/course-form/course-form.component';
 
 const COMPONENTS = [
   HeaderComponent,
@@ -19,7 +21,9 @@ const COMPONENTS = [
   SearchComponent,
   CourseCardComponent,
   CourseListComponent,
-  ModalWindowComponent
+  ModalWindowComponent,
+  SearchComponent,
+  CourseFormComponent
 ];
 
 @NgModule({
@@ -30,9 +34,14 @@ const COMPONENTS = [
   ],
   imports: [
     CommonModule,
-    FontAwesomeModule
+    FontAwesomeModule,
+    FormsModule,
+    ReactiveFormsModule,
   ],
   exports:[
+    CommonModule,
+    FormsModule,
+    ReactiveFormsModule,
     COMPONENTS
   ]
 })

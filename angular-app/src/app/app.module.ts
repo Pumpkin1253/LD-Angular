@@ -3,7 +3,7 @@ import { BrowserModule } from '@angular/platform-browser';
 
 import { AppComponent } from './app.component';
 import { CoursesModule } from './features/courses/courses.module';
-
+import { SharedModule } from './shared/shared.module';
 
 @NgModule({
   declarations: [
@@ -11,7 +11,8 @@ import { CoursesModule } from './features/courses/courses.module';
   ],
   imports: [
     BrowserModule,
-    CoursesModule
+    SharedModule,
+    CoursesModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

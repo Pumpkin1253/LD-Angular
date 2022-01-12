@@ -8,4 +8,8 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'component-hw';
+
+  log(event: string){
+    console.log(event)
+  }
 }

@@ -10,7 +10,6 @@ import { SharedModule } from 'src/app/shared/shared.module';
     CoursesComponent
   ],
   imports: [
-    CommonModule,
     SharedModule
   ],
   exports:[
