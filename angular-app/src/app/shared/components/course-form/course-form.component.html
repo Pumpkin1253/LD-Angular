@@ -1,50 +1,100 @@
-<div class="course-form">
+<form class="course-form" [formGroup]="courseForm" (ngSubmit)="onSubmit(courseForm.value)">
+
+
+    <!-- TITLE INPUT -->
     <div class="form__content">
         <h3 class="form__subtitle">Title</h3>
         <div class="form__field">
-            <input type="text" class="form__input">
-            <button class="form__btn">Create course</button>
+            <input type="text" 
+            class="form__input"
+            formControlName="title"
+            [ngClass]="{'form__input--invalid': 
+            (!titleField && isSubmitBtnPressed) || (!titleField && courseForm.get('title')?.touched)}">
+
+            <button type="submit" class="button__btn">Create course</button>
         </div>
+
+        <div class="form__error-text"
+        *ngIf="(!titleField && isSubmitBtnPressed) || (!titleField && courseForm.get('title')?.touched)"
+        >Title is required</div>
     </div>
 
+
+    <!-- DESCRIPTION INPUT -->
     <div class="form__content">
         <h3 class="form__subtitle">Description</h3>
-        <input type="text" class="form__input form__input--large">
+        <input type="text" 
+        class="form__input form__input--large"
+        formControlName="description"
+        [ngClass]="{'form__input--invalid': 
+        (!descriptionField && isSubmitBtnPressed) || (!descriptionField && courseForm.get('description')?.touched)}">
+
+        <div class="form__error-text"
+        *ngIf="(!descriptionField && isSubmitBtnPressed) || (!descriptionField && courseForm.get('description')?.touched)"
+        >Description is required</div>
     </div>
 
 
+    <!-- AUTHOR INPUT -->
     <div class="author-form">
         <div class="form__content">
             <h3 class="form__title">Add authors</h3>
             <h3 class="form__subtitle">Author name</h3>
-            <input type="text" class="form__input">
-            <button class="form__btn form__btn--centered">Create author</button>
+            <input type="text" 
+            class="form__input"
+            formControlName="newAuthor"
+            [ngClass]="{'form__input--invalid': 
+            courseForm.get('newAuthor')?.hasError('notALatinSymbOrNum')}" >
+            
+            <div class="form__error-text"
+            *ngIf="courseForm.get('newAuthor')?.hasError('notALatinSymbOrNum')"
+            >Author name should include only latin letters and numbers</div>
+
+            <button type='button' 
+            class="button__btn button__btn--centered" 
+            [disabled]="!newAuthorField || courseForm.get('newAuthor')?.hasError('notALatinSymbOrNum')" 
+            (click)="addAuthor()">Create author</button>
         </div>
 
         <div class="form__content">
             <h3 class="form__title">Authors list</h3>
-            <div class="author__list">
-                <div class="author__card">
-                    <div class="author__name">some author</div>
-                    <button class="form__btn">Delete author</button>
-                </div>
-
-                <div class="author__card">
-                    <div class="author__name">some author</div>
-                    <button class="form__btn">Delete author</button>
+            <div class="author__list" formArrayName="authors">
+                <div class="author__card" *ngFor="let author of authors.controls; index as i">
+                    <div class="author__name">{{author.value}}</div>
+                    <button type='button' class="button__btn">Delete author</button>
                 </div>
             </div>
         </div>
 
+
+        <!-- DURATION INPUT -->
         <div class="form__content">
             <h3 class="form__title">Duration</h3>
             <h3 class="form__subtitle">Duration</h3>
-            <input type="text" class="form__input">
+            <input type="text" 
+            class="form__input"
+            formControlName="duration"
+            [ngClass]="{'form__input--invalid': 
+            (!durationField && isSubmitBtnPressed) || (!durationField && courseForm.get('duration')?.touched)
+            || courseForm.get('duration')?.hasError('min') || courseForm.get('duration')?.hasError('pattern')}" >
+
+            <div class="form__error-text"
+            *ngIf="(!durationField && isSubmitBtnPressed) || (!durationField && courseForm.get('duration')?.touched)"
+            >Duration is required</div>
+
+            <div class="form__error-text"
+            *ngIf="(durationField && courseForm.get('duration')?.hasError('pattern'))"
+            >Only numbers allowed</div>
+
+            <div class="form__error-text"
+            *ngIf="(!courseForm.get('duration')?.hasError('pattern') && courseForm.get('duration')?.hasError('min'))"
+            >Duration has to be more than 0</div>
+
             <div class="form__duration-text">
                 Duration: <b>00:00</b> hours
             </div>
         </div>
     </div>
 
-</div>
+</form>
 

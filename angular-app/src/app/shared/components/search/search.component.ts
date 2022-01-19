@@ -1,5 +1,4 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { FormControl } from '@angular/forms';
 
 @Component({
   selector: 'app-search',
@@ -10,15 +9,18 @@ export class SearchComponent implements OnInit {
   @Input() placeholderText!: string;
   @Output() searchDataEvent = new EventEmitter<string>();
   
-  searchData: FormControl = new FormControl();
-
-  constructor() { }
-
-  searchBtnClick(){
-    this.searchDataEvent.emit(this.searchData.value)
-  }
 
   ngOnInit(): void {
   }
+
+
+  onSubmit(value: any){
+    if(value.search){
+      alert("Searching")
+      this.searchDataEvent.emit(value)
+    }
+    
+  }
+
 
 }

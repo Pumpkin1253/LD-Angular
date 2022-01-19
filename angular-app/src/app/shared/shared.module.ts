@@ -13,6 +13,13 @@ import { CourseListComponent } from './components/course-list/course-list.compon
 import { ModalWindowComponent } from './components/modal-window/modal-window.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { CourseFormComponent } from './components/course-form/course-form.component';
+import { EmailValidatorDirective } from './directives/email-validator.directive';
+import { RegistrationComponent } from './components/registration/registration.component';
+import { LoginComponent } from './components/login/login.component';
+import { StringJoinerPipe } from './pipes/string-joiner.pipe';
+import { CreationDatePipe } from './pipes/creation-date.pipe';
+import { PasswordDirective } from './directives/password.directive';
+
 
 const COMPONENTS = [
   HeaderComponent,
@@ -23,14 +30,20 @@ const COMPONENTS = [
   CourseListComponent,
   ModalWindowComponent,
   SearchComponent,
-  CourseFormComponent
+  CourseFormComponent,
+  RegistrationComponent,
+  LoginComponent
 ];
 
 @NgModule({
   declarations: [
     COMPONENTS,
     DurationPipe,
-    AuthorsPipe
+    AuthorsPipe,
+    EmailValidatorDirective,
+    StringJoinerPipe,
+    CreationDatePipe,
+    PasswordDirective
   ],
   imports: [
     CommonModule,
@@ -40,8 +53,14 @@ const COMPONENTS = [
   ],
   exports:[
     CommonModule,
+    FontAwesomeModule,
     FormsModule,
-    ReactiveFormsModule,
+    EmailValidatorDirective,
+    DurationPipe,
+    AuthorsPipe,
+    StringJoinerPipe,
+    CreationDatePipe,
+    PasswordDirective,
     COMPONENTS
   ]
 })

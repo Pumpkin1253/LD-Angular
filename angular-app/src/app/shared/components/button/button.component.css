@@ -5,28 +5,21 @@
 .button-wrapper *{
     margin-left: 5px;
 }
-.button__btn{
-    padding: 5px 20px;
-    border: 2px solid #914cd8;
-    background-color: white;
-}
+
 .button__icon{
     padding: 5px;
     border: 2px solid #914cd8;
 }
-.button__icon:hover,
-.button__btn:hover{
+.button__icon:hover{
     color: #ffffff;
     background-color: #914cd8;
 }
-.button__icon:focus,
-.button__btn:focus{
+.button__icon:focus{
     color: #ffffff;
     background-color: #c18af8;
     border: 2px solid #c18af8;
 }
-.button__icon:active,
-.button__btn:active{
+.button__icon:active{
     color: #ffffff;
     background-color: #731bcc;
     border: 2px solid #731bcc;

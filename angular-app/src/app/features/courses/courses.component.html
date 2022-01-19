@@ -1,7 +1,8 @@
-<app-header>
-    <p>Dave</p>
-    <button>Logout</button>
-</app-header>
+
+<app-search
+placeholderText = "Search"
+(searchDataEvent) = "log($event)">
+</app-search>
 
 <app-button 
     [btnText]="showModalBtnText"

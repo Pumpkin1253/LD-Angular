@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 
+import { CreationDatePipe } from './shared/pipes/creation-date.pipe';
 
 @Component({
   selector: 'app-root',
@@ -8,8 +9,8 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'component-hw';
+  date = new Date();
 
-  log(event: string){
-    console.log(event)
-  }
+  array: string[] = ["Hello", "nice", "to", "see", "you"];
+  separator: string = "!";
 }

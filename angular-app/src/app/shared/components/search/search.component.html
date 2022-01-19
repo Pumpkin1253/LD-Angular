@@ -1,4 +1,9 @@
-<div class="search__form">
-    <input type="text" class="search__input" placeholder={{placeholderText}} [formControl]="searchData">
-    <button class="search__btn" (click)="searchBtnClick()">Search</button>
-</div>
+<form class="search__form" #searchForm="ngForm" (ngSubmit)="onSubmit(searchForm.value)">
+    <input type="text" 
+    class="search__input" 
+    name="search"
+    placeholder={{placeholderText}} 
+    #searchInput="ngModel" 
+    ngModel > 
+    <button class="button__btn search-btn">Search</button>
+</form>

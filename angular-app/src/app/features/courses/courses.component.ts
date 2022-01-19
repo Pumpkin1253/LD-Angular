@@ -34,6 +34,10 @@ export class CoursesComponent implements OnInit {
     this.isModalWindowShowed = event;
   }
 
+  log(event: string){
+    console.log(event)
+  }
+
   ngOnInit(): void {
     this.courses = this.coursesService.getCourses();
   }
