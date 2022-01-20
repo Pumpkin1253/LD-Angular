@@ -1,23 +1,19 @@
 import { Directive,  ElementRef, HostListener, Input, SimpleChanges } from '@angular/core';
 
 @Directive({
-  selector: '[appPassword]'
+  selector: '[appPassword]',
+  exportAs: 'appPassword'
 })
 export class PasswordDirective {
-  @Input() public hide!: boolean;
+  isPasswordType: boolean = true;
 
   constructor(private el: ElementRef) {
   }
-  
-  ngOnChanges(changes: SimpleChanges){
-    if(changes['hide']){
-      if(this.hide){
-        this.el.nativeElement.type = "password";
-      }else{
-        this.el.nativeElement.type = "text";
-      }
-    }
-  }
 
+  onToggle(){
+    this.el.nativeElement.type =  this.isPasswordType ? "text" : "password";
+    this.isPasswordType = !this.isPasswordType;  
+  }
+  
 
 }

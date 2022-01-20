@@ -9,9 +9,7 @@
         class="form__input"
         placeholder="example@gmail.com"
         name="email" 
-        [ngClass]="{'form__input--invalid': 
-        (!emailField && isSubmitBtnPressed) || (!emailField && emailInput.touched)
-        || emailInput.hasError('emailvalidator') || emailInput.hasError('maxSymbols')}"
+        [ngClass]="{'form__input--invalid': isEmailValid(emailInput)}"
         #emailInput="ngModel" 
         ngModel
         appEmailValidator
@@ -45,9 +43,13 @@
         #passwInput="ngModel" 
         ngModel
         appPassword
-        [hide] = "isPasswordHidden"
+        #passwordDirective = "appPassword"
         required>
-        <fa-icon class="password-icon" [icon]="eyeIcon" (click)="passwordEyeClick()"></fa-icon>
+        
+        <fa-icon class="password-icon" 
+        [icon]="passwordDirective.isPasswordType ? eyeIcon : eyeSlashIcon" 
+        (click)="passwordDirective.onToggle()">
+        </fa-icon>
         
         <!-- Err text is displayed if there is empty PASSWORD field and submit btn was pressed or input field was touched  -->
         <div class="form__error-text" 

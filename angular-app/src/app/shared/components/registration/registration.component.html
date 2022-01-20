@@ -7,9 +7,7 @@
         <h3 class="form__subtitle">Name</h3>
         <input type="text" 
         class="form__input" 
-        [ngClass]="{'form__input--invalid': 
-        (!nameField && isSubmitBtnPressed) || (!nameField && regForm.get('name')?.touched) 
-        || regForm.get('name')?.hasError('minlength')}"
+        [ngClass]="{'form__input--invalid': isNameValid()}"
         formControlName="name" >
 
         <!-- Err text is displayed if there is empty NAME field and submit btn was pressed or input field was touched  -->
@@ -30,9 +28,7 @@
         <input type="text" 
         class="form__input"
         placeholder="example@gmail.com"
-        [ngClass]="{'form__input--invalid': 
-        (!emailField && isSubmitBtnPressed) || (!emailField && regForm.get('email')?.touched)
-        || regForm.get('email')?.hasError('emailvalidator') || regForm.get('email')?.hasError('maxSymbols')}"
+        [ngClass]="{'form__input--invalid': isEmailValid()}"
         formControlName="email"
         appEmailValidator>
 
@@ -62,8 +58,12 @@
         (!passwordField && isSubmitBtnPressed) || (!passwordField && regForm.get('password')?.touched)}"
         formControlName="password" 
         appPassword
-        [hide] = "isPasswordHidden">
-        <fa-icon class="password-icon" [icon]="eyeIcon" (click)="passwordEyeClick()"></fa-icon>
+        #passwordDirective = "appPassword">
+        
+        <fa-icon class="password-icon" 
+        [icon]="passwordDirective.isPasswordType ? eyeIcon : eyeSlashIcon" 
+        (click)="passwordDirective.onToggle()">
+        </fa-icon>
         
         <!-- Err text is displayed if there is empty PASSWORD field and submit btn was pressed or input field was touched  -->
         <div class="form__error-text" 

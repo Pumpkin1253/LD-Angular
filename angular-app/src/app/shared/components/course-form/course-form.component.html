@@ -74,9 +74,7 @@
             <input type="text" 
             class="form__input"
             formControlName="duration"
-            [ngClass]="{'form__input--invalid': 
-            (!durationField && isSubmitBtnPressed) || (!durationField && courseForm.get('duration')?.touched)
-            || courseForm.get('duration')?.hasError('min') || courseForm.get('duration')?.hasError('pattern')}" >
+            [ngClass]="{'form__input--invalid': isDurationValid()}" >
 
             <div class="form__error-text"
             *ngIf="(!durationField && isSubmitBtnPressed) || (!durationField && courseForm.get('duration')?.touched)"

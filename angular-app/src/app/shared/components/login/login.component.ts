@@ -12,6 +12,7 @@ import { Subscription } from 'rxjs';
 export class LoginComponent implements OnInit {
 
   eyeIcon = faEye;
+  eyeSlashIcon = faEyeSlash;
   isSubmitBtnPressed: boolean = false; //to avoid errs 'required' as component loads
 
   emailField!: string;
@@ -28,7 +29,7 @@ export class LoginComponent implements OnInit {
     })
   }
 
-  onSubmit(value: any){
+  onSubmit(value: any): void{
     this.isSubmitBtnPressed = true;
   
     this.emailField = value.email;
@@ -40,15 +41,9 @@ export class LoginComponent implements OnInit {
     
   }
 
-  passwordEyeClick(){
-    if(this.eyeIcon === faEye){ // show password
-      this.eyeIcon = faEyeSlash
-      this.isPasswordHidden = false;
-      
-    }else{ // hide password
-      this.eyeIcon = faEye
-      this.isPasswordHidden = true;
-    }
+  isEmailValid(emailInput: any): boolean{
+    return (!this.emailField && this.isSubmitBtnPressed) || (!this.emailField && emailInput.touched)
+    || emailInput.hasError('emailvalidator') || emailInput.hasError('maxSymbols');
   }
 
   ngOnDestroy(): void{

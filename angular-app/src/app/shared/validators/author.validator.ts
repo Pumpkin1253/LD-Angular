@@ -2,8 +2,8 @@ import { AbstractControl, FormControl, ValidationErrors, ValidatorFn } from "@an
 
 export function onlyLatinSymbAndNums(): ValidatorFn {
     return (control: AbstractControl): ValidationErrors | null => {
-        let reg = /^[a-zA-Z0-9]*$/
-        let res = reg.test(control.value)
+        const reg = /^[a-zA-Z0-9]*$/
+        const res = reg.test(control.value)
         
         if(res){
             return null;

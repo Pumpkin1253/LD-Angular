@@ -38,7 +38,7 @@ export class CourseFormComponent implements OnInit {
     }); 
   }
 
-  onSubmit(value: any){
+  onSubmit(value: any): void{
     this.titleField = value.title;
     this.descriptionField = value.description;
     this.durationField = value.duration;
@@ -51,8 +51,13 @@ export class CourseFormComponent implements OnInit {
     }
   }
 
-  addAuthor(){
+  addAuthor(): void{
     this.authors.push(new FormControl(this.newAuthorField));
+  }
+
+  isDurationValid(): boolean{
+    return (!this.durationField && this.isSubmitBtnPressed) || (!this.durationField && this.courseForm.get('duration')?.touched)
+    || this.courseForm.get('duration')?.hasError('min') || this.courseForm.get('duration')?.hasError('pattern')!;
   }
 
   ngOnDestroy(): void{
