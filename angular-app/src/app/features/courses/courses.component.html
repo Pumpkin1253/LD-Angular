@@ -1,0 +1,31 @@
+
+<app-search
+placeholderText = "Search"
+(searchDataEvent) = "log($event)">
+</app-search>
+
+<app-button 
+    [btnText]="showModalBtnText"
+    (click)="showModalWindow()">
+</app-button>
+
+<app-modal-window
+    [title]="modalTitle"
+    [message]="modalMessage"
+    [okButtonText]="modalOkBtnText"
+    [cancelButtonText]="modalCancelBtnText" 
+    (hideModalEvent) = "hideModal($event)" *ngIf="isModalWindowShowed">
+</app-modal-window>
+
+<app-course-list
+    [courses]="courses"
+    [isEditable]="isEditable">
+</app-course-list>
+
+<app-info
+    [title]="infoTitle"
+    [text]="infoText" *ngIf="courses.length == 0">
+    <app-button 
+        [btnText]="infoBtnText">
+    </app-button>
+</app-info>

@@ -1,0 +1,52 @@
+.course-form .form__content{
+    margin-bottom: 20px; 
+}
+.form__title{
+    text-align: center;
+    margin-bottom: 5px;
+}
+.form__subtitle{
+    margin-bottom: 5px;
+}
+.form__field{
+    display: flex;
+    justify-content: space-between;
+}
+.form__field .form__input{
+    width: 85%;
+}
+.form__input{
+    width: 99%;
+    border: 2px solid #f1a05d;
+}
+.form__input--large{
+    padding-bottom: 200px;
+    border: 2px solid #f9e1a2;
+}
+.author-form{
+    padding: 15px;
+    display: flex;
+    flex-wrap: wrap;
+    border: 2px solid #c9c9c9;
+}
+.author-form .form__content{
+    margin: 0;
+    width: 50%;
+}
+.author__list{
+    width: 100%;
+}
+.author__card{
+    margin-bottom: 10px;
+    display: flex;
+    justify-content: space-evenly;
+}
+.form__duration-text{
+    margin-top: 10px;
+}
+.form__error-text{
+    color: red;
+}
+.form__input--invalid{
+    border: 2px solid red;
+}

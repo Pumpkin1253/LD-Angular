@@ -1,0 +1,35 @@
+/* You can add global styles to this file, and also import other style files */
+body{
+    padding: 0;
+    margin: 0;
+}
+h1,h2,h3,h4,h5,h6,
+p{
+    margin: 0;
+}
+.button__btn{
+    padding: 5px 20px;
+    border: 2px solid #914cd8;
+    background-color: white;
+}
+.button__btn--large{
+    padding: 5px 50px;
+}
+.button__btn--centered{
+    display: block;
+    margin: 10px auto;
+ }
+.button__btn:hover{
+    color: #ffffff;
+    background-color: #914cd8;
+}
+.button__btn:focus{
+    color: #ffffff;
+    background-color: #c18af8;
+    border: 2px solid #c18af8;
+}
+.button__btn:active{
+    color: #ffffff;
+    background-color: #731bcc;
+    border: 2px solid #731bcc;
+}

@@ -1,0 +1,26 @@
+.button-wrapper{
+    display: flex;
+    justify-content: center;
+}
+.button-wrapper *{
+    margin-left: 5px;
+}
+
+.button__icon{
+    padding: 5px;
+    border: 2px solid #914cd8;
+}
+.button__icon:hover{
+    color: #ffffff;
+    background-color: #914cd8;
+}
+.button__icon:focus{
+    color: #ffffff;
+    background-color: #c18af8;
+    border: 2px solid #c18af8;
+}
+.button__icon:active{
+    color: #ffffff;
+    background-color: #731bcc;
+    border: 2px solid #731bcc;
+}
