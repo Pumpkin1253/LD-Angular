@@ -1,0 +1,16 @@
+<app-course-card
+[title]="course.title"
+[description]="course.description"
+[creationDate]="course.creationDate"
+[duration]="course.duration"
+[authors]="course.authors"
+*ngIf="isCourseExists; else noSuchCourse"
+>
+
+</app-course-card>
+
+<ng-template #noSuchCourse>
+    <app-info
+    title="No Such Course">
+    </app-info>
+</ng-template>

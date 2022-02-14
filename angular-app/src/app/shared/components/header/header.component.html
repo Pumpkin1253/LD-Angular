@@ -1,7 +1,10 @@
 <div class="header-wrapper">
-    <img class="header__logo" src="./../../../../assets/images/logo.png" alt="">
+    <a href="/courses">
+        <img class="header__logo" src="./../../../../assets/images/logo.png" alt="">
+    </a>
+    
 
-    <div class="header__log-part">
+    <div class="header__log-part" *ngIf="!isLoginOrRegPage">
         <ng-content></ng-content>
     </div>
     

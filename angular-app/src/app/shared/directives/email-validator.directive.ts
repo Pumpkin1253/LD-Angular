@@ -16,7 +16,7 @@ export class EmailValidatorDirective implements Validator{
   validate(formControl: AbstractControl): ValidationErrors | null {
 
     if(formControl.value !== null && formControl.value !== ''){
-      let reg = /^[a-zA-Z]+@(gmail.com|ukr.net)$/;
+      let reg = /^[a-zA-Z]+@(gmail.com|ukr.net|email.com)$/;
 
       if(formControl.value.length > 30){
         return {

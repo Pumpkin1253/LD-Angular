@@ -1,11 +1,11 @@
 <div class="modal-fade">
     <div class="modal-wrapper">
-        <fa-icon class="modal__cancel-icon" [icon]="faTimesCircle" (click)="hideModalWindow()"></fa-icon>
+        <fa-icon class="modal__cancel-icon" [icon]="faTimesCircle" (click)="closeModalWindow()"></fa-icon>
         <h2 class="modal__title">{{title}}</h2>
         <p class="modal__text">{{message}}</p>
         <div class="modal__btns">
-            <button class="modal__btn modal__ok-btn" (click)="hideModalWindow()">{{okButtonText}}</button>
-            <button class="modal__btn modal__cancel-btn" (click)="hideModalWindow()">{{cancelButtonText}}</button>
+            <button class="modal__btn modal__ok-btn" (click)="approveAction()">{{okButtonText}}</button>
+            <button class="modal__btn modal__cancel-btn" (click)="closeModalWindow()">{{cancelButtonText}}</button>
         </div>
     </div>
 </div>

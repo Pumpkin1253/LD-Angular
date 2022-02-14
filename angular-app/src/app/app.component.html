@@ -1,24 +1,8 @@
-<div class="header-wrapper">
-    <app-header>
-        <div>Dave</div>
-        <app-button btnText="Logout"></app-button>
-    </app-header>
-</div>
+<app-header>
+    <p >{{userName}}</p>
+    <a [href]="href">
+        <app-button [btnText]="btnText" (click)="btnClick()"></app-button>
+    </a>
+</app-header>
 
-<app-courses></app-courses>
-
-<div class="form-wrapper">
-    <app-course-form></app-course-form>
-</div>
-
-<div class="form-wrapper">
-    <app-login></app-login>
-</div>
-
-<div class="form-wrapper">
-    <app-registration></app-registration>
-</div>
-
-<div> creationDate pipe   {{date | creationDate}}</div>
-<div> stringJoiner pipe   {{array | stringJoiner: separator}}</div>
-<div> duration pipe   {{125 | duration}}</div>
+<router-outlet ></router-outlet>
