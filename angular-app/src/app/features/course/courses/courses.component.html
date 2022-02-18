@@ -1,0 +1,39 @@
+<app-search
+    placeholderText = "Search by title"
+    (searchDataEvent) = "search($event)"
+    (clearInputEvent)="clearSearch()">
+</app-search>
+
+<a href="/courses/add" *ngIf="isEditable">
+    <app-button 
+        btnText="Add Course">
+    </app-button>
+</a>
+
+<app-modal-window
+    title="Do you want to delete this course?"
+    okButtonText="Yes"
+    cancelButtonText="No" 
+    (modalResult) = "deleteCourse($event)" *ngIf="isModalWindowShowed">
+</app-modal-window>
+
+<app-course-list
+    [courses]="courses"
+    [isEditable]="isEditable"
+    (courseBtnClick)="processCourseBtnClick($event)">
+</app-course-list>
+
+<app-info
+    title="Your list is empty"
+    text="Please use 'Add new course' button to add your fist course" *ngIf="noCourses">
+    <a href="/courses/add">
+        <app-button 
+            btnText="Add new course">
+        </app-button>
+    </a>
+</app-info>
+
+<app-info
+    title="The are no Courses with such title" *ngIf="noSearchedCourses">
+</app-info>
+

@@ -11,7 +11,7 @@
 .header__log-part{
     width: 200px;
     display: flex;
-    justify-content: space-between;
+    justify-content: end;
     align-items: center;
 }
 .header__log-part:first-child{

@@ -1,0 +1,12 @@
+<div class="course-card">
+        <div class="card__main-info">
+            <h2 class="card__title">{{title}}</h2>
+            <div class="card__description">{{description}}</div>
+        </div>
+        <div class="card__additional-info">
+            <div> <b>Authors:</b> {{authors | authors}} </div>
+            <div> <b>Duration:</b> {{duration | duration}} </div>
+            <div> <b>Created:</b> {{creationDate | creationDate}} </div>
+            <div class="card__btns"><ng-content></ng-content></div>
+        </div>
+    </div>

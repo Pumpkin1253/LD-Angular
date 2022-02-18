@@ -13,13 +13,17 @@ export class ModalWindowComponent implements OnInit {
   @Input() okButtonText!: string;
   @Input() cancelButtonText!: string;
 
-  @Output() hideModalEvent = new EventEmitter<boolean>();
+  @Output() modalResult = new EventEmitter<boolean>();
 
   faTimesCircle = faTimesCircle;
   constructor() { }
 
-  hideModalWindow(){
-    this.hideModalEvent.emit(false);
+  approveAction(){
+    this.modalResult.emit(true);
+  }
+
+  closeModalWindow(){
+    this.modalResult.emit(false);
   }
 
   ngOnInit(): void {

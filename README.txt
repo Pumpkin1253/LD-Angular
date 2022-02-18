@@ -1,5 +1,14 @@
 installation:
- - npm i
+ - npm i in Frontend
+ - npm i in Backend
+
+run:
+ - npm run start in Backend
+ - npm run start in Front
+
+Tips:
+ - only admin account can add\edit\delete courses or authors
+
 
 tips:
  - to see info component delete all course objects in courses.service (app\shared\services)

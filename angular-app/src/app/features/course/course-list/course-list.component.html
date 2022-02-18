@@ -1,0 +1,24 @@
+<div class="course-list-wrapper">
+    <div *ngFor="let course of courses">
+        <app-course-card
+        [title]="course.title"
+        [description]="course.description"
+        [duration]="course.duration"
+        [creationDate]="course.creationDate"
+        [authors]="course.authors">
+            <app-button 
+                [btnText]="btnText"
+                [firstIconName]="firstIconName"
+                [secondIconName]="secondIconName" 
+                (click)="processBtnClick($event, course)" *ngIf = "isEditable; else elseBlock">
+            </app-button>
+
+            <ng-template #elseBlock >
+                <app-button 
+                [btnText]="btnText"
+                (click)="processBtnClick($event, course)">
+                </app-button>
+            </ng-template>
+        </app-course-card>
+    </div>
+</div>

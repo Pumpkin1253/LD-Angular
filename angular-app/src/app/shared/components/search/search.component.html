@@ -3,7 +3,8 @@
     class="search__input" 
     name="search"
     placeholder={{placeholderText}} 
-    #searchInput="ngModel" 
+    #searchInput
     ngModel > 
+    <fa-icon class="cancel-icon" [icon]="faTimesCircle" (click)="clearInput()" *ngIf="cancelIconShowed"></fa-icon>
     <button class="button__btn search-btn">Search</button>
 </form>

@@ -10,3 +10,8 @@
     width: 15%;
     margin-left: 5%;
 }
+.cancel-icon{
+    position: relative;
+    left: -25px;
+    top: 5px;
+}

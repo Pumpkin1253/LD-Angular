@@ -11,8 +11,6 @@ export class ButtonComponent implements OnInit {
   @Input() firstIconName?: any;
   @Input() secondIconName?: any;
 
-
-  
   constructor() { }
 
   ngOnInit(): void {
