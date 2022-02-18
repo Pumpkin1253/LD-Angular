@@ -2,19 +2,24 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { Router } from '@angular/router';
 import { faEye, faEyeSlash } from '@fortawesome/free-solid-svg-icons';
+import { Actions } from '@ngrx/effects';
+import { Store } from '@ngrx/store';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 
 import { AuthService } from 'src/app/auth/services/auth.service';
 import { SessionStorageService } from 'src/app/auth/services/session-storage.service';
+import { AuthStateFacade } from 'src/app/auth/store/auth.facade';
 import { AuthorModel } from 'src/app/shared/models/author';
 import { User } from 'src/app/shared/models/user';
+import { UserService } from 'src/app/user/services/user.service';
+import { UserStateFacade } from 'src/app/user/store/user.facade';
 
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.css',
-   './../registration/registration.component.css']
+    './../registration/registration.component.css']
 })
 export class LoginComponent implements OnInit {
 
@@ -30,78 +35,83 @@ export class LoginComponent implements OnInit {
 
   fieldsAreWrong: boolean = false; // backend responce state
 
+  @ViewChild('loginForm', { static: true }) loginForm!: NgForm; // for subscribing
+
+  public authState = new AuthStateFacade(this.store$, this.actions$, this.authService, this.userService);
+  public userState = new UserStateFacade(this.store$, this.actions$, this.userService);
+
   destroy$ = new Subject();
 
-  @ViewChild('loginForm', { static: true }) loginForm!: NgForm; // for subscribing
-  
   constructor(
     private authService: AuthService,
+    private userService: UserService,
     private sessionStorageService: SessionStorageService,
-    private router: Router){
+    private router: Router,
+    private store$: Store,
+    private actions$: Actions) {
   }
 
   ngOnInit(): void {
 
-    setTimeout(()=>{
+    setTimeout(() => {
       this.loginForm.setValue({
-        email:"admin@email.com",
-        password:"admin123"
+        email: "admin@email.com",
+        password: "admin123"
       })
     }, 0); // to autocomplete login fields
 
     this.loginForm.form.valueChanges
       .pipe(takeUntil(this.destroy$))
       .subscribe(value => {
-      this.emailField = value.email;
-      this.passwordField = value.password;
-    });
+        this.emailField = value.email;
+        this.passwordField = value.password;
+      });
   }
 
 
-  onSubmit(value: any): void{
+  onSubmit(value: any): void {
     this.isSubmitBtnPressed = true;
-  
+
     this.emailField = value.email;
     this.passwordField = value.password;
 
-    if(this.loginForm.valid){
+    if (this.loginForm.valid) {
       let user: User = {
         "email": this.emailField,
-        "password":this.passwordField
+        "password": this.passwordField
       };
 
-      this.authService.login(user)
+      this.authState.login(user);
+      this.authState.getToken$
         .pipe(takeUntil(this.destroy$))
         .subscribe({
-          next: data => {
-            if(data){
+          next: token => {
+            if (token) {
               this.fieldsAreWrong = false;
-              this.sessionStorageService.setToken(data);
-
-              this.router.navigate(['path/to'])
-                .then(() => {
-                  window.location.reload();
-                });
+              this.sessionStorageService.setToken(token);
+              this.router.navigate(['/courses']);
             }
-           },
-           error: () => {
+          },
+          error: err => {
             this.fieldsAreWrong = true;
           }
-        });
+        })
     }
   }
 
-  isEmailValid(emailInput: any): boolean{
+  isEmailValid(emailInput: any): boolean {
     return (!this.emailField && this.isSubmitBtnPressed) || (!this.emailField && emailInput.touched)
-    || emailInput.hasError('emailvalidator') || emailInput.hasError('maxSymbols');
+      || emailInput.hasError('emailvalidator') || emailInput.hasError('maxSymbols');
   }
 
-  isPasswordValid(passwInput: any): boolean{
-    return  (!this.passwordField && this.isSubmitBtnPressed) || (!this.passwordField && passwInput.touched)
-    || passwInput.hasError('minSymbols');
+  isPasswordValid(passwInput: any): boolean {
+    return (!this.passwordField && this.isSubmitBtnPressed) || (!this.passwordField && passwInput.touched)
+      || passwInput.hasError('minSymbols');
   }
 
-  ngOnDestroy(): void{
+  ngOnDestroy(): void {
+    this.userState.getCurrentUser();
+
     this.destroy$.next(true);
     this.destroy$.complete();
   }

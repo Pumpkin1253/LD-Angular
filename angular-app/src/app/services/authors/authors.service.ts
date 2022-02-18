@@ -12,22 +12,22 @@ export class AuthorsService {
 
   constructor(private http: HttpClient) { }
 
-  getAll(){
+  getAll() {
     return this.http.get<any>("http://localhost:3000/authors/all")
-    .pipe(map(data => data.result));
+      .pipe(map(data => data.result));
   }
 
-  addAuthor(author: AuthorModel){
+  addAuthor(author: AuthorModel) {
     return this.http.post<any>("http://localhost:3000/authors/add", author)
-    .pipe(map(data => data.result));
+      .pipe(map(data => data.result));
     //.pipe(catchError(this.handleError));
   }
 
-  deleteAuthor(id: string){
+  deleteAuthor(id: string) {
     return this.http.delete<any>(`http://localhost:3000/authors/${id}`)
   }
 
-  handleError(err: HttpErrorResponse){
+  handleError(err: HttpErrorResponse) {
     console.log(err.message);
     return throwError(() => new Error('Error occured'));
   }

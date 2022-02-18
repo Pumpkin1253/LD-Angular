@@ -1,6 +1,5 @@
 <form class="form-wrapper" [formGroup]="regForm" (ngSubmit)="onSubmit(regForm.value)">
     <h2 class="form__title">Registration</h2>
-    
 
     <!-- NAME INPUT -->
     <div class="form__content">
@@ -81,6 +80,6 @@
 
     <div class="form__content form__content--centered">
         <button class="button__btn button__btn--large">Registration</button>
-        <div class="form__text">If you have an accout you can <a href="/login">Login</a></div>
+        <div class="form__text">If you have an accout you can <a routerLink="/login">Login</a></div>
     </div>
 </form>

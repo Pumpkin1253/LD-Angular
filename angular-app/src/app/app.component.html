@@ -1,8 +1,17 @@
-<app-header>
-    <p >{{userName}}</p>
-    <a [href]="href">
-        <app-button [btnText]="btnText" (click)="btnClick()"></app-button>
+<app-header *ngIf="(userState.name$ | async); let username; else notAuthorized">
+    <p>{{username}}</p>
+
+    <a routerLink="/courses">
+        <app-button btnText="Logout" (click)="btnClick()"></app-button>
     </a>
 </app-header>
+
+<ng-template #notAuthorized>
+    <app-header>
+        <a routerLink="/login">
+            <app-button btnText="Login"></app-button>
+        </a>
+    </app-header>
+</ng-template>
 
 <router-outlet ></router-outlet>

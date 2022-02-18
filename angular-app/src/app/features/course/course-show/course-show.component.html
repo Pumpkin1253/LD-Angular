@@ -1,13 +1,14 @@
-<app-course-card
-[title]="course.title"
-[description]="course.description"
-[creationDate]="course.creationDate"
-[duration]="course.duration"
-[authors]="course.authors"
-*ngIf="isCourseExists; else noSuchCourse"
->
+<div *ngIf="(this.coursesState.course$ | async)?.title != ''; else noSuchCourse">
+    <app-course-card  
+    [title]="course.title"
+    [description]="course.description"
+    [creationDate]="course.creationDate"
+    [duration]="course.duration"
+    [authors]="course.authors" *ngIf="(this.coursesState.course$ | async); let course">
 
-</app-course-card>
+    </app-course-card>
+</div>
+
 
 <ng-template #noSuchCourse>
     <app-info
