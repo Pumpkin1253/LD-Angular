@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Location } from '@angular/common';
+import { Router, NavigationStart  } from '@angular/router';
 
 @Component({
   selector: 'app-header',
@@ -10,17 +10,22 @@ export class HeaderComponent implements OnInit {
   isLoginOrRegPage: boolean = false;
 
   constructor(
-    private location: Location
+    private router: Router
   ) { }
 
   ngOnInit(): void {
-    let url = this.location.path();
 
-    if(/login/.test(url) || /registration/.test(url)){
-      this.isLoginOrRegPage = true;
-    }else{
-      this.isLoginOrRegPage = false;
-    }
+
+    this.router.events.subscribe(e => {
+      if(e instanceof NavigationStart){
+        if(/login/.test(e.url) || /registration/.test(e.url)){
+          this.isLoginOrRegPage = true;
+        }else{
+          this.isLoginOrRegPage = false;
+        }
+      }
+    });
+    
   }
 
 

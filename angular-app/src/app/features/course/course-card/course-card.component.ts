@@ -12,6 +12,8 @@ export class CourseCardComponent implements OnInit {
   @Input() duration!: number;
   @Input() authors!: string[];
 
+  
+
   constructor() { }
 
   ngOnInit(): void {

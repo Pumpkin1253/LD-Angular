@@ -33,7 +33,6 @@ export class AuthService {
     .pipe(map(data => data.result));
   }
 
-  // need a token
   logout(){
     this.isAuthorised = false;
     return this.http.delete<any>("http://localhost:3000/logout");

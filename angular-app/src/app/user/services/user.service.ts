@@ -8,7 +8,7 @@ export class UserService {
 
   constructor(private http: HttpClient) { }
 
-  getUser(){
+  getUser() {
     return this.http.get<any>("http://localhost:3000/users/me");
   }
 }

@@ -4,9 +4,9 @@
     (clearInputEvent)="clearSearch()">
 </app-search>
 
-<a href="/courses/add" *ngIf="isEditable">
+<a routerLink="/courses/add" *ngIf="userState.isAdmin$ | async as boolean">
     <app-button 
-        btnText="Add Course">
+        btnText="Add Course" *ngIf="!noCourses">
     </app-button>
 </a>
 
@@ -18,22 +18,34 @@
 </app-modal-window>
 
 <app-course-list
-    [courses]="courses"
-    [isEditable]="isEditable"
-    (courseBtnClick)="processCourseBtnClick($event)">
+    [courses]="(coursesState.allCourses$ | async)!"
+    [isEditable]="(userState.isAdmin$ | async)!"
+    (courseBtnClick)="processCourseBtnClick($event)" *ngIf="!(coursesState.isSearchingState$ | async); else searchList">
 </app-course-list>
 
+<ng-template #searchList>
+    <app-course-list
+        [courses]="(coursesState.courses$ | async)!"
+        [isEditable]="(userState.isAdmin$ | async)!"
+        (courseBtnClick)="processCourseBtnClick($event)" 
+        *ngIf="(coursesState.courses$ | async)!.length !=0; let searchedCourses; else noSearchedCourses">
+    </app-course-list>
+</ng-template>
+
+
 <app-info
-    title="Your list is empty"
-    text="Please use 'Add new course' button to add your fist course" *ngIf="noCourses">
-    <a href="/courses/add">
+    title="Your list is empty" *ngIf="noCourses">
+    <a routerLink="/courses/add" *ngIf="userState.isAdmin$ | async as boolean">
         <app-button 
             btnText="Add new course">
         </app-button>
     </a>
 </app-info>
 
-<app-info
-    title="The are no Courses with such title" *ngIf="noSearchedCourses">
-</app-info>
+<ng-template #noSearchedCourses>
+    <app-info
+        title="The are no Courses with such title">
+    </app-info>
+</ng-template>
+
 

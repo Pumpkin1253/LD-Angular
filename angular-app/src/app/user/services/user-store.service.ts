@@ -14,29 +14,29 @@ export class UserStoreService {
   public isAdmin!: boolean;
   name!: string;
 
-  constructor(private userService: UserService) { 
+  constructor(private userService: UserService) {
   }
 
-  getUser(){
+  getUser() {
     return this.userService.getUser()
-    .pipe(map(data => {
-      if(data != null){
-        let user = data.result;
+      .pipe(map(data => {
+        if (data != null) {
+          let user = data.result;
 
-        if(user.role == "admin"){
-          this.isAdmin = true;
-          this.isAdmin$$.next(true);
-        }else{
-          this.isAdmin = false;
-          this.isAdmin$$.next(false);
+          if (user.role == "admin") {
+            this.isAdmin = true;
+            this.isAdmin$$.next(true);
+          } else {
+            this.isAdmin = false;
+            this.isAdmin$$.next(false);
+          }
+
+          this.name = user.name;
+          return user;
+        } else {
+          return null;
         }
-        
-        this.name = user.name;
-        return user;
-      }else{
-        return null;
-      }
-    }));
+      }));
   }
 
 }

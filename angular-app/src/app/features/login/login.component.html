@@ -1,7 +1,6 @@
 <form class="form-wrapper" #loginForm="ngForm" (ngSubmit)="onSubmit(loginForm.value)">
     <h2 class="form__title">Login</h2>
     
-
     <!-- EMAIL INPUT -->
     <div class="form__content">
         <h3 class="form__subtitle">Email</h3>
@@ -65,6 +64,6 @@
 
     <div class="form__content form__content--centered">
         <button class="button__btn button__btn--large">Login</button>
-        <div class="form__text">If you don't have an accout you can <a href="/registration">Registration</a></div>
+        <div class="form__text">If you don't have an accout you can <a routerLink="/registration">Registration</a></div>
     </div>
 </form>

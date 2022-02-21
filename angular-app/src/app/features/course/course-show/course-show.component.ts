@@ -1,10 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { Subject, Subscription, takeUntil } from 'rxjs';
+import { Subject, takeUntil } from 'rxjs';
+import { Actions } from '@ngrx/effects';
+import { Store } from '@ngrx/store';
 
-import { Course } from 'src/app/shared/models/course';
-import { CoursesStoreService } from 'src/app/services/courses/courses-store.service';
-import { AuthorsStoreService } from 'src/app/services/authors/authors-store.service';
+import { CoursesService } from 'src/app/services/courses/courses.service';
+import { CourseStateFacade } from 'src/app/store/courses/courses.facade';
+import { AuthorsStateFacade } from 'src/app/store/authors/authors.facade';
+import { AuthorsService } from 'src/app/services/authors/authors.service';
 
 @Component({
   selector: 'app-course-show',
@@ -13,37 +16,28 @@ import { AuthorsStoreService } from 'src/app/services/authors/authors-store.serv
 })
 export class CourseShowComponent implements OnInit {
 
-  course!: Course;
+  public coursesState = new CourseStateFacade(this.store$, this.actions$, this.courseService, this.router);
+  public authorsState = new AuthorsStateFacade(this.store$, this.actions$, this.authorsService);
 
-  isEditable: boolean = false;
-  isCourseExists: boolean = false;
-
-  courseById: Course[] = [];
   destroy$ = new Subject();
 
   constructor(
-    private coursesStoreService: CoursesStoreService,
-    private authorsStoreService: AuthorsStoreService,
-    private activatedRoute: ActivatedRoute
+    public courseService: CoursesService,
+    private authorsService: AuthorsService,
+    private store$: Store,
+    private actions$: Actions,
+    private activatedRoute: ActivatedRoute,
+    private router: Router
     ) { }
 
   ngOnInit(): void {
+    this.authorsState.getAuthors();
     this.activatedRoute.paramMap
     .pipe(takeUntil(this.destroy$))
     .subscribe(param => {
       let id: string = param.get('id') as string;
 
-      this.coursesStoreService.getCourse(id)
-      .pipe(takeUntil(this.destroy$))
-      .subscribe({
-        next: data => {
-          this.course = this.authorsStoreService.replaceWithAuthorName(data) as Course;
-          this.isCourseExists = true;
-        },
-        error: ()=>{
-          this.isCourseExists = false;
-        }
-      });
+      this.coursesState.getSingleCourse(id);
     });
   }
 
